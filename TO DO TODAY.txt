@@ -1,0 +1,25 @@
+TO DO TODAY:
+
+put the project on private GitHub acct. -- DONE
+
+* Update all print lines with the to be made function
+* make the function
+* remove all unnecessary parts from the project
+
+-- note from 9:22pm: did way more than  that. solved dice alignment (with help) and am now working on the postroll ui.
+
+
+Gonna write down which face it says is up, see if they're at least consistent before I do anything else.
+
+die face 2 up == roll 6
+
+1 up s roll v 3
+
+2 up is roll v 2
+
+1 up is roll v 3
+
+ == 
+
+
+delete face components from die, they're stupid

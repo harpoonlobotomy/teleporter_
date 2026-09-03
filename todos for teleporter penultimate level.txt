@@ -1,0 +1,7 @@
+todos for teleporter penultimate level:
+
+Walking gets slower gradually
+camera should pull in at the same time.
+
+pushing nearby to the button counts as a button push.
+clicking at here you already are doesn't bother moving you.

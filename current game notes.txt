@@ -1,0 +1,16 @@
+current game notes:
+
+If the obj clicked is a clickable thing (and you're already close?), don't use it to update the nav. (so I don't keep trying to walk towards the button when I press it.)
+
+Oh I guess it should be just 'if the distance is within x of current loc, don't bother.' More reliable.
+
+Need the button to press down visually when you press it, need a sound to play, and need a fade to white and switch to a menu screen. That'll do for the test today.
+
+Re: all the above:
+
+It plays a sound currently.
+Haven't done the 'don't move if within range' yet.
+
+When I hit the button, I want to hide the 'glow' prop, then kill the glow material on the teleporter, maybe with a 'zoop' effect. The screen stays on, with whatever message is relevant. Then it fades to full black, and cuts to the next scene.
+
+Also: need a door closing sound effect when the level loads, to imply you just came out the door.

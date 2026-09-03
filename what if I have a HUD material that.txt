@@ -1,0 +1,1 @@
+what if I have a HUD material that records the pixel positions? Then can apply that to whatever.

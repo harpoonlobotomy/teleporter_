@@ -1,0 +1,18 @@
+Need to plan the 'game' structure, in terms of progression.
+
+
+
+starts: oh no, teleporter is broken. (was always? who knows. worldbuild later.)
+next: find list of components (3 things for now.)
+components: 
+* one, you have in the starting room, just have to grab it.
+* two, need to have a conversation with an object and convince it to come with you?
+* three, some arbitrary key to activate something. idk. 
+
+(All very low effort but I can make it interesting once it works.)
+
+once you have all components:
+* get one last mcgibble needed to get it working.
+then, to teleporter.
+
+ends: post-teleporter, naracoorte.

@@ -1,0 +1,76 @@
+30/8/26
+
+why am I not using a workdoc. This is a workdoc now.
+
+farkle mobile, the game I'm working on currently, is a simple 3D farkle game. Just want basic functions for now.
+
+I've started a heap of unreal projects before this one in the last month. (the 'unreal projects' folder was created 3 Augest 2026, so my first initial install was this month. I'm pleased w/ that really.) Most of them did literally nothing, I was just poking at it to see what it did and starting over whenever it was broken or I wanted to test something else.
+
+
+current things to remember to do:
+
+
+set a timer of some kind after the dice are released, if not settled by timer end, make settle.
+
+when the dice are settled, change camera from character-focused to dice-and-ui-elements focused (the 'reroll area' view I thought about last night).
+
+after the roll, send to a score manager (deals with the actual farkle game logic for points etc. I basically need a guy that runs the actual farkle game part.) to do the same farkle logic as the earlier games.
+
+
+
+Have been stuck on 'changing cameras' for most of the day. This mron
+
+5:37pm finally got it to swap cameras. Now once all the dice are sleeping, the camera swaps (with blend) to dicecam.
+
+-----------------
+
+tomorrow:
+
+clcking on dice should do something. - fixed
+set up the board with the planned indents. - done
+^  
+updated at 31-8-26 / 2:30am.
+
+----
+continuing from above:
+clicking on dice should be a toggle, not always-on.
+
+make a new UI panel for 'keep' to appear on-screen when (for now, any) dice is clicked (to move to the left side).
+** make sure the transparent areas of the UI panel are 'not clickable', so the dice can be clicked behind the button layout. ** (have made this mistake twice now.)
+
+OH - the dice should 'sink' when they're 'used', with some convenient shadow or something to make them less distinct. Something auteurish lmao but I know what I mean. ## this is purely aesthetic and can wait til much later, just wanted to write it down.
+
+11.49pm:
+
+current issue: oh, this should be GitHub issues.
+dice are not placed at the correct location. An issue of the physics movement + actor movement, but -- oooh. I'm not using centre of mass, am I...
+
+add 1/2 dice height to seat pos.
+
+
+9.36am
+Been at it for abt an hour. 
+Couldn't sleep last night. Googled it. For the physics location to work properly the mesh needs to be root, so I've done that. It did massively improve the locations, but now I can't rotate the dice without them being rotated from 0,0,0 despite that not being their location. Working on it now.
+
+I need to figure out what's dropping the dice from that height, because I honestly can't remember. Really should write it down...
+
+10.13 just realised the issue. Origin is really far away. I don't know when, don't know how. 
+
+Oh. Probably when I made it root, it absorbed root's transform? Maybe? Idk. Will fix and test this anyway.
+
+11.45am
+have fixed it. Now it rotates properly and lands properly. Will commit, then go back to the 'snap to location' plan from yesterday.
+idea: generate and move die along a curve from current.pos to target.pos instead of teleporting or sliding.
+
+
+Apply velocity to dice on roll start.
+fix the dice funnel: currently doesn't work at all so deleted, will come back to it.
+
+Right, dice seating. That was meant to be what I was doing.
+shit, didn't eat yet. It'll be cold. Will try to have some now.
+
+
+Die seating works ish, just need to stop it rotating too hard.
+
+6.54pm: dice now sit pretty much in the right spot, close enough for now. But, it draws a new dilemma: I need the numbers right-way-up in the display area.  when they roll I don't mind. 
+so I need a top and bottom of each face. I guess maybe I just make sure Z is always +? Will test.

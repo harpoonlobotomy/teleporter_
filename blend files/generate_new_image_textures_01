@@ -1,0 +1,139 @@
+# generate_new_image_textures_01
+
+""" Adds (x) image texture nodes to the current material (or new on current obj, toggleable).
+
+# Potentially: also automate the image node selection and bake type, but not sure how that works so do the other part first.
+
+To avoid having to run the dialog each time.
+
+Variables:
+    
+    which bake layers do you want? (default: normal/roughness/albedo, but sometimes, smoothness, metallic, emissive, etc etc etc)
+        - check boxes for each option.
+        - use these boxes for image texture node names/filenames.
+        - some kind of checkbox for when the texture has been generated (and how long ago? Read from the output folder or something like that, so I can easily internally check if a texture's been created and when. Will use a central folder to keep it managable.
+
+"""
+
+import bpy
+
+
+DESIRED_TEXTURE_NODES = ["DIFFUSE", "ROUGHNESS", "NORMAL", "EMISSION"]
+
+COLORSPACE_sRGB = ["DIFFUSE", "EMISSION"] # ELSE NON-COLOR
+#node.image.colorspace_settings.name = color_space
+
+
+def get_current_obj():
+    """ set correct context, make sure obj is selected and is mesh type. Return the object, not the mesh itself, at material is set per-obj not per-mesh."""
+
+    obj = bpy.context.active_object
+
+    if not obj or obj.type != 'MESH':
+        raise RuntimeError("Select a mesh object")
+        
+
+    mat = bpy.data.materials.get(obj.name, None)
+    
+    if not mat:
+        mat = bpy.data.materials.new(obj.name)
+        mat.use_nodes = True
+        obj.data.materials.append(mat)
+
+    node_tree = mat.node_tree
+        # FULL CLEAR
+    #obj.active_material = mat
+
+    return node_tree, mat
+
+
+
+def check_for_existing_textures():
+    """ Check if any/all of the requested textures already exist, will reuse depending on settings.
+    """
+    return
+
+def get_request_list_from_UI_panel():
+    """ self-descriptive. Just a place to formalise getting the data. """
+    return
+
+
+
+#####
+
+# from template generator
+
+def add_frame_with_id(loc, node_id, node_name, node_tree):
+    
+    if add_frame_with_id:
+        label = str(node_id) + "_" + str(node_name)
+        main_size = 180
+        frame = node_tree.nodes.new("NodeFrame")
+        frame.location = Vector(loc)
+        frame.width = main_size
+        frame.height = main_size
+        frame.label = label
+        frame.use_custom_color = True
+        frame.color = (0.224, 0.412, 0.453) # make it a range of colours maybe. Not sure how to pick. Will think about it.
+        
+        
+
+def add_textures(node_tree, mat):
+    
+    placement_height = 0
+    
+    height = width = 512
+    
+    for TEXTURE_TYPE in DESIRED_TEXTURE_NODES:
+
+        node_name = mat.name + "_" + TEXTURE_TYPE.upper()
+
+        def check_existing_TexImages(node_name, node_tree):
+            
+            for node in node_tree.nodes:
+                print(f"NODE: {node}")
+                if node.type == "ShaderNodeTexImage":
+                    print("ShaderNodeTexImage Found")
+    
+            if "ShaderNodeTexImage" in node_type:
+                if " - " in name:
+                    _, imagename = name.split(" - ", 1)
+                    node.label = imagename        
+
+        
+
+
+        existing_node = node_tree.nodes.get(node_name)
+        
+        if existing_node:
+            new_image = existing_node.image
+            new_texture_node = existing_node
+        
+        else:
+            new_texture_node = node_tree.nodes.new(type="ShaderNodeTexImage")
+        
+            new_image = bpy.data.images.new(
+                name=node_name, 
+                width=width, 
+                height=height, 
+                alpha=True
+            )
+            #   new_image.generated_color = bg_color # solid bg colour. not sure why? necessary?
+            new_texture_node.image = new_image
+            
+        
+        if TEXTURE_TYPE in COLORSPACE_sRGB:
+            color_space = "sRGB"
+        else:
+            color_space = "Non-Color"
+                    
+        new_image.colorspace_settings.name = color_space
+        
+        new_texture_node.location = ((-500, placement_height))
+        placement_height = placement_height + 200
+
+
+if __name__ == "__main__":
+    
+    node_tree, mat = get_current_obj()
+    add_textures(node_tree, mat)

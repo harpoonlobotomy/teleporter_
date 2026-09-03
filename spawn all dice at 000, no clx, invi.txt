@@ -1,0 +1,12 @@
+spawn all dice at 000, no clx, invisible on event start. print location + index @ loc
+
+on roll, move up, set visible, print location(!!), set clx, set physics on
+
+on sleep, print location again, print roll value, print d_idx
+
+post-proc glow on selected dice
+
+
+spawn at 0, then move and apply clx
+
+ADD FORCE SETTLE CHECK AFTER PAUSE IF ALL FLAT.
